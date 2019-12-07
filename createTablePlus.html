@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+caption{
+    font-size: 30px;
+    font-weight:bold;
+    margin-bottom: 20px;
+}
+td{
+    width: 100px;
+    text-align: center;
+}
+a{
+    position: absolute;
+    top: 20%;
+    left: 21%;
+}
+.box1{
+    display: none;
+}
+.box{
+    position: relative;
+}
+span{
+    display: block;
+    font-size: 30px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+<div class="box">
+    <div class="box1">
+<form action="javascript:;">
+    <span>表格添加</span></br>
+    请输入姓名:<input type="text" class="name"><br>
+    请输入年龄:<input type="text" class="age"><br>
+    请输入性别:<input type="text" class="sex"><br>
+    <input type="submit" class="btn">
+</form>
+</div>
+<div class="box2">
+<table border="1">
+    <caption>内容展示</caption>
+    <thead>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+<a href="javascript:;" class="add">添加</a>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+function Biaoge(classname){
+    this.box = document.querySelector('.'+classname);
+    this.box1 = document.querySelector('.box1')
+    this.box2 = document.querySelector('.box2')
+    this.tbody = this.box.querySelector('tbody');
+    this.name = this.box.querySelector('.name');
+    this.age = this.box.querySelector('.age');
+    this.sex = this.box.querySelector('.sex')
+    this.btn = this.box.querySelector('.btn');
+    this.add = this.box.querySelector('.add');
+    this.btn.addEventListener('click',()=>{
+        this.getValue();
+    })
+    this.add.addEventListener('click',()=>{
+        this.show();
+    })
+    
+}
+Biaoge.prototype.show=function(){
+    this.box2.style.display = 'none';
+    this.box1.style.display = 'block';
+}
+
+Biaoge.prototype.getValue=function(){
+var arr = [];
+var name = this.name.value;
+var age = this.age.value;
+var sex = this.sex.value;
+this.name.value = '';
+this.age.value = '';
+this.sex.value = '' ;
+arr.push(name);
+arr.push(age);
+arr.push(sex);
+var tr = document.createElement('tr');
+for(var i=0;i<arr.length;i++){
+    var td = document.createElement('td');
+    td.innerText = arr[i];
+    tr.appendChild(td);
+}
+var czTd = document.createElement('td')
+czTd.innerText = '删除';
+tr.appendChild(czTd);
+this.tbody.appendChild(tr);
+this.tds = this.tbody.querySelectorAll('td:last-Child');
+this.removeValue(this.tds);
+this.box1.style.display = 'none';
+this.box2.style.display = 'block';
+}
+
+Biaoge.prototype.removeValue=function(tds){
+    var _this = this;
+    for(var i=0;i<tds.length;i++){
+        tds[i].addEventListener('click',function(){
+            _this.tbody.removeChild(this.parentNode);
+        })
+    }
+    
+}
+var biaoge = new Biaoge('box')
+</script>
+</html>

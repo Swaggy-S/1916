@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+<table border="1px">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</body>
+<script type="text/javascript">
+var tbody = document.querySelector('tbody');
+var arr = [
+    {
+        name:'孙文龙',
+        age:22,
+        sex:'男'
+    },
+    {
+        name:'孙孙孙',
+        age:23,
+        sex:'男'
+    }
+]
+for(var i=0;i<arr.length;i++){
+    var tr = document.createElement('tr');
+    for(var j in arr[i]){
+        var td = document.createElement('td');
+        td.innerText = arr[i][j];
+        tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+}
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+.box{
+    width: 500px;
+    height: 450px;
+    border: 1px solid #000;
+}
+ul,ol{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #ccc;
+}
+ul li{
+    width: 150px;
+    height: 30px;
+    background-color: pink;
+    text-align: center;
+    line-height: 30px;
+}
+ol li{
+    height: 420px;
+    width: 500px;
+    display: none;
+}
+ol li img{
+    width: 100%;
+    height: 100%;
+}
+ol li.current{
+    display: block;
+}
+ul li.current{
+    background-color: yellow;
+}
+</style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li class="current">红色</li>
+        <li>黄色</li>
+        <li>绿色</li>
+    </ul>
+    <ol>
+        <li class="current"><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/3.jpg" alt=""></li>
+    </ol>
+</div>
+</body>
+<script type="text/javascript">
+function Tab(classname){
+    var _this = this;
+    this.box = document.querySelector('.'+classname);
+    this.ulis = this.box.querySelectorAll('ul li');
+    this.olis = this.box.querySelectorAll('ol li');
+    for(var i=0;i<this.ulis.length;i++){
+        this.ulis[i].index = i;
+        this.ulis[i].onclick=function(){
+            _this.qiehuan(this);
+        }
+    }
+}
+Tab.prototype.qiehuan=function(uu){
+    for(var i=0;i<this.ulis.length;i++){
+        this.ulis[i].className = '';
+        this.olis[i].className = '';
+    }
+    uu.className = 'current';
+    this.olis[uu.index].className = 'current';
+}
+var tab = new Tab('box');
+</script>
+</html>
